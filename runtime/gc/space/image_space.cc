@@ -781,11 +781,13 @@ ImageSpace* ImageSpace::Init(const char* image_filename, const char* image_locat
 }
 
 OatFile* ImageSpace::OpenOatFile(const char* image_path, std::string* error_msg) const {
+  LOG(WARNING) << "OpenOatFile: " << image_path;
   const ImageHeader& image_header = GetImageHeader();
   std::string oat_filename = ImageHeader::GetOatLocationFromImageLocation(image_path);
 
   CHECK(image_header.GetOatDataBegin() != nullptr);
 
+  LOG(WARNING) << "OatFile::Open: " << oat_filename;
   OatFile* oat_file = OatFile::Open(oat_filename, oat_filename, image_header.GetOatDataBegin(),
                                     image_header.GetOatFileBegin(),
                                     !Runtime::Current()->IsAotCompiler(),

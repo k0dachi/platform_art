@@ -720,7 +720,9 @@ static bool OpenDexFilesFromImage(const std::string& image_location,
   // We are falling back to non-executable use of the oat file because patching failed, presumably
   // due to lack of space.
   std::string oat_filename = ImageHeader::GetOatLocationFromImageLocation(system_filename.c_str());
+  LOG(WARNING) << "oat_filename: " << oat_filename;
   std::string oat_location = ImageHeader::GetOatLocationFromImageLocation(image_location.c_str());
+  LOG(WARNING) << "oat_location: " << oat_location;
   std::unique_ptr<File> file(OS::OpenFileForReading(oat_filename.c_str()));
   if (file.get() == nullptr) {
     return false;
